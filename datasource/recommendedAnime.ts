@@ -1,0 +1,58 @@
+export const recommendedAnime = [
+  {
+    id: "1",
+    title: "Attack on Titan",
+    rating: "9.4",
+    subtitle: "Action • Finished",
+    image: "https://cdn.myanimelist.net/images/anime/10/47347l.jpg",
+  },
+  {
+    id: "2",
+    title: "Attack on Titan",
+    rating: "9.4",
+    subtitle: "Action • Finished",
+    image: "https://cdn.myanimelist.net/images/anime/10/47347l.jpg",
+  },
+  {
+    id: "3",
+    title: "Demon Slayer",
+    rating: "8.9",
+    subtitle: "Fantasy • Ongoing",
+    image: "https://cdn.myanimelist.net/images/anime/1286/99889l.jpg",
+  },
+  {
+    id: "4",
+    title: "One Piece",
+    rating: "9.6",
+    subtitle: "Adventure • Ongoing",
+    image: "https://cdn.myanimelist.net/images/anime/6/73245l.jpg",
+  },
+  {
+    id: "5",
+    title: "Jujutsu Kaisen",
+    rating: "9.0",
+    subtitle: "Supernatural • Ongoing",
+    image: "https://cdn.myanimelist.net/images/anime/1171/109222l.jpg",
+  },
+  {
+    id: "6",
+    title: "Chainsaw Man",
+    rating: "8.8",
+    subtitle: "Action • 12 Episodes",
+    image: "https://cdn.myanimelist.net/images/anime/1806/126216l.jpg",
+  },
+  {
+    id: "7",
+    title: "Blue Lock",
+    rating: "8.7",
+    subtitle: "Sports • Ongoing",
+    image: "https://cdn.myanimelist.net/images/anime/1258/126929l.jpg",
+  },
+  {
+    id: "8",
+    title: "Oshi no Ko",
+    rating: "8.9",
+    subtitle: "Drama • Ongoing",
+    image: "https://cdn.myanimelist.net/images/anime/1812/134736l.jpg",
+  },
+];
