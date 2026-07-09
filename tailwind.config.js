@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // NOTE: Update this to include the paths to all of your component files.
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
@@ -12,13 +11,13 @@ module.exports = {
         "background-dark": "#221610",
       },
       fontFamily: {
-        "quicksand": ["Quicksand-Regular"],
-        "quicksand-medium": ["Quicksand-Medium"],
-        "quicksand-bold": ["Quicksand-Bold"],
-        "quicksand-extrabold": ["Quicksand-ExtraBold"],
+        logo: ["Outfit_800ExtraBold"],
+        heading: ["PlusJakartaSans_700Bold"],
+        subheading: ["PlusJakartaSans_600SemiBold"],
+        body: ["Inter_400Regular"],
+        medium: ["Inter_500Medium"],
       },
     },
   },
   plugins: [],
 };
-

@@ -13,7 +13,21 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { PaperProvider } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "sonner-native";
-import * as Font from "expo-font";
+import { useFonts } from "expo-font";
+
+import {
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+} from "@expo-google-fonts/inter";
+
+import {
+  PlusJakartaSans_500Medium,
+  PlusJakartaSans_600SemiBold,
+  PlusJakartaSans_700Bold,
+} from "@expo-google-fonts/plus-jakarta-sans";
+
+import { Outfit_700Bold, Outfit_800ExtraBold } from "@expo-google-fonts/outfit";
 
 SplashScreen.setOptions({
   duration: 5000,
@@ -24,39 +38,34 @@ function InitialLayout() {
   const { isAuthenticated, isLoading, token } = useSelector(
     (state: RootState) => state.auth,
   );
+
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const segments = useSegments();
+
   const [isLayoutMounted, setIsLayoutMounted] = useState(false);
+
   const [onboardingCompleted, setOnboardingCompleted] = useState<
     boolean | null
   >(false);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
 
-  // Load custom fonts
-  useEffect(() => {
-    const loadFonts = async () => {
-      try {
-        await Font.loadAsync({
-          "Quicksand-Light": require("@/assets/fonts/Quicksand-Light.ttf"),
-          "Quicksand-Regular": require("@/assets/fonts/Quicksand-Regular.ttf"),
-          "Quicksand-Medium": require("@/assets/fonts/Quicksand-Medium.ttf"),
-          "Quicksand-Bold": require("@/assets/fonts/Quicksand-Bold.ttf"),
-        });
-        setFontsLoaded(true);
-      } catch (error) {
-        console.error("Error loading fonts:", error);
-        setFontsLoaded(true); // Continue even if fonts fail to load
-      }
-    };
-    loadFonts();
-  }, []);
+  const [fontsLoaded] = useFonts({
+    // Inter
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
 
-  // useEffect(() => {
-  //   dispatch(loadUser());
-  // }, [dispatch]);
+    // Plus Jakarta Sans
+    PlusJakartaSans_500Medium,
+    PlusJakartaSans_600SemiBold,
+    PlusJakartaSans_700Bold,
+
+    // Outfit
+    Outfit_700Bold,
+    Outfit_800ExtraBold,
+  });
 
   useEffect(() => {
     setIsLayoutMounted(true);
@@ -67,8 +76,14 @@ function InitialLayout() {
       const completed = await hasCompletedOnboarding();
       setOnboardingCompleted(completed);
     };
+
     checkOnboarding();
   }, []);
+
+  // Uncomment when ready
+  // useEffect(() => {
+  //   dispatch(loadUser());
+  // }, [dispatch]);
 
   // useEffect(() => {
   //   const setupToken = async () => {
@@ -76,11 +91,13 @@ function InitialLayout() {
   //       await setAxiosAuthToken(token);
   //     }
   //   };
+  //
   //   setupToken();
   // }, [isAuthenticated, isLoading, token]);
 
   // useEffect(() => {
   //   if (!isLayoutMounted || isLoading) return;
+  //
   //   router.replace("/onboarding");
   // }, [
   //   isLayoutMounted,
@@ -91,30 +108,49 @@ function InitialLayout() {
   //   user,
   // ]);
 
+  if (!fontsLoaded) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "#0b1326",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator size="large" color="#8B5CF6" />
+      </View>
+    );
+  }
+
   return (
     <>
       <View style={{ flex: 1, backgroundColor: "#0b1326" }}>
-      <Stack
-        screenOptions={{
-          headerShadowVisible: false,
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "700",
-            color: "#fff",
-          },
-        }}
-      >
-        {/* <Stack.Screen name="onboarding" options={{ headerShown: false }} /> */}
-        {/* <Stack.Screen name="auth/login" options={{ headerShown: false }} /> */}
-        {/* <Stack.Screen name="auth/signup" options={{ title: "Sign Up" }} /> */}
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="(protected)"
-          options={{
-            headerShown: false,
+        <Stack
+          screenOptions={{
+            headerShadowVisible: false,
+            headerTintColor: "#fff",
+            headerStyle: {
+              backgroundColor: "#0b1326",
+            },
+            headerTitleStyle: {
+              fontFamily: "PlusJakartaSans_700Bold",
+              color: "#fff",
+              fontSize: 20,
+            },
           }}
-        />
-      </Stack>
+        >
+          <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
+          <Stack.Screen
+            name="(protected)"
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack>
       </View>
 
       {!isLayoutMounted && (
@@ -122,15 +158,15 @@ function InitialLayout() {
           style={{
             position: "absolute",
             top: 0,
-            left: 0,
             right: 0,
             bottom: 0,
+            left: 0,
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "#0b1326",
           }}
         >
-          <ActivityIndicator size="large" color="#015788" />
+          <ActivityIndicator size="large" color="#8B5CF6" />
         </View>
       )}
     </>
@@ -139,7 +175,12 @@ function InitialLayout() {
 
 export default function RootLayout() {
   return (
-    <GestureHandlerRootView style={{ flex: 1, backgroundColor: "#0b1326" }}>
+    <GestureHandlerRootView
+      style={{
+        flex: 1,
+        backgroundColor: "#0b1326",
+      }}
+    >
       <ReduxProvider>
         <PaperProvider>
           <InitialLayout />
