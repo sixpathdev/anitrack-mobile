@@ -35,34 +35,34 @@ export const trendingAnime: TrendingAnime[] = [
     rating: "8.9",
     image: "https://cdn.myanimelist.net/images/anime/1171/109222l.jpg",
   },
-  {
-    id: "5",
-    title: "Jujutsu Kaisen",
-    genres: "Action • Supernatural • 47 Episodes",
-    rating: "8.7",
-    image: "https://cdn.myanimelist.net/images/anime/10/47347l.jpg",
-  },
-  {
-    id: "6",
-    title: "Naruto Shippuden",
-    genres: "Action • Adventure • 500 Episodes",
-    rating: "8.9",
-    image: "https://cdn.myanimelist.net/images/anime/1170/124312l.jpg",
-  },
-  {
-    id: "7",
-    title: "Chainsaw Man",
-    genres: "Action • Horror • 12 Episodes",
-    rating: "8.6",
-    image:
-      "https://cdn.myanimelist.net/images/anime/1170/124312l.jpg",
-  },
-  {
-    id: "8",
-    title: "My Hero Academia",
-    genres: "Action • Superhero • 150+ Episodes",
-    rating: "8.4",
-    image:
-      "https://cdn.myanimelist.net/images/anime/1170/124312l.jpg",
-  },
+  // {
+  //   id: "5",
+  //   title: "Jujutsu Kaisen",
+  //   genres: "Action • Supernatural • 47 Episodes",
+  //   rating: "8.7",
+  //   image: "https://cdn.myanimelist.net/images/anime/10/47347l.jpg",
+  // },
+  // {
+  //   id: "6",
+  //   title: "Naruto Shippuden",
+  //   genres: "Action • Adventure • 500 Episodes",
+  //   rating: "8.9",
+  //   image: "https://cdn.myanimelist.net/images/anime/1170/124312l.jpg",
+  // },
+  // {
+  //   id: "7",
+  //   title: "Chainsaw Man",
+  //   genres: "Action • Horror • 12 Episodes",
+  //   rating: "8.6",
+  //   image:
+  //     "https://cdn.myanimelist.net/images/anime/1170/124312l.jpg",
+  // },
+  // {
+  //   id: "8",
+  //   title: "My Hero Academia",
+  //   genres: "Action • Superhero • 150+ Episodes",
+  //   rating: "8.4",
+  //   image:
+  //     "https://cdn.myanimelist.net/images/anime/1170/124312l.jpg",
+  // },
 ];

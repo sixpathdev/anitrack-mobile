@@ -7,7 +7,7 @@ export default function SentRecommendationsScreen() {
   return (
     <ScreenWrapper
       bg="#0b1326"
-      scroll={true}
+      scroll={false}
       className="px-4"
       includeTopSafeArea={false}
     >

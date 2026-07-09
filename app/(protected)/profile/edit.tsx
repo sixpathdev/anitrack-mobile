@@ -48,11 +48,22 @@ export default function EditProfileScreen() {
 
       <View className="mb-6">
         <Text className="text-[#cfc2d6] mb-2 font-quicksand-medium">
-          DISPLAY NAME
+          Full Name
         </Text>
         <TextInput
           defaultValue="Arata_Saito"
-          placeholder="Enter display name"
+          placeholder="Enter full name"
+          placeholderTextColor="#7f8698"
+          className="bg-[#171f33] rounded-xl px-4 py-4 text-white"
+        />
+      </View>
+      <View className="mb-6">
+        <Text className="text-[#cfc2d6] mb-2 font-quicksand-medium">
+          Username
+        </Text>
+        <TextInput
+          defaultValue="sixpathdev"
+          placeholder="Enter username"
           placeholderTextColor="#7f8698"
           className="bg-[#171f33] rounded-xl px-4 py-4 text-white"
         />
@@ -73,7 +84,6 @@ export default function EditProfileScreen() {
         <Text className="text-[#cfc2d6] mb-2 font-quicksand-medium">
           EMAIL ADDRESS
         </Text>
-
         <View className="bg-[#171f33] rounded-xl flex-row items-center px-4">
           <Ionicons name="lock-closed" size={18} color="#cfc2d6" />
           <TextInput

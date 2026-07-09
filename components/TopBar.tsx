@@ -12,9 +12,9 @@ export default function TopBar() {
     <View className="flex-row items-center justify-between px-5 py-4">
       <Image
         source={{
-          uri: "https://images.unsplash.com/photo-1500648767791-00dcc994a43",
+          uri: "https://cdn.myanimelist.net/images/anime/1170/124312l.jpg",
         }}
-        className="h-10 w-10 rounded-full border-2 border-[#ddb7ff]"
+        className="h-10 w-10 rounded-full border border-[#ddb7ff]"
       />
 
       <GradientLogo />

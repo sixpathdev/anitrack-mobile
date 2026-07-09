@@ -93,6 +93,7 @@ function InitialLayout() {
 
   return (
     <>
+      <View style={{ flex: 1, backgroundColor: "#0b1326" }}>
       <Stack
         screenOptions={{
           headerShadowVisible: false,
@@ -114,6 +115,7 @@ function InitialLayout() {
           }}
         />
       </Stack>
+      </View>
 
       {!isLayoutMounted && (
         <View
@@ -125,7 +127,7 @@ function InitialLayout() {
             bottom: 0,
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "white",
+            backgroundColor: "#0b1326",
           }}
         >
           <ActivityIndicator size="large" color="#015788" />
@@ -137,7 +139,7 @@ function InitialLayout() {
 
 export default function RootLayout() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: "#0b1326" }}>
       <ReduxProvider>
         <PaperProvider>
           <InitialLayout />

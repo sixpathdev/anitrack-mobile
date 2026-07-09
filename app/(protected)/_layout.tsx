@@ -1,7 +1,9 @@
 import { Stack } from "expo-router";
+import { View } from "react-native";
 
 export default function ProtectedLayout() {
   return (
+    <View style={{ flex: 1, backgroundColor: "#0b1326" }}>
     <Stack
       screenOptions={{
         headerShadowVisible: false,
@@ -52,5 +54,6 @@ export default function ProtectedLayout() {
       />
       <Stack.Screen name="anime/[id]" options={{ title: "Anime Details" }} />
     </Stack>
+    </View>
   );
 }

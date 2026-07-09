@@ -24,7 +24,7 @@ interface ScreenWrapperProps {
 
 export default function ScreenWrapper({
   children,
-  bg = "",
+  bg = "#0b1326",
   style,
   className,
   scroll = true,
@@ -36,7 +36,7 @@ export default function ScreenWrapper({
         {
           flex: 1,
           paddingHorizontal: "4%",
-          backgroundColor: bg,
+          backgroundColor: bg || "#0b1326",
         },
         style,
       ]}

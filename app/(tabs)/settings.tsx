@@ -3,10 +3,10 @@ import { useRouter } from "expo-router";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import LogoutButton from "@/components/settings/LogoutButton";
 import { ProfileTabListing } from "@/datasource/profileTab";
-import { MaterialIcons } from "@expo/vector-icons";
 
 export default function ProfileScreen() {
   const router = useRouter();
+  
 
   return (
     <ScreenWrapper bg="#0b1326" scroll={false}>
@@ -19,7 +19,7 @@ export default function ProfileScreen() {
             className="h-full w-full rounded-full"
           />
         </View>
-        <Text className="text-white text-2xl font-bold mt-4">@Arata_Saito</Text>
+        <Text className="text-white text-2xl font-bold mt-4">@sixpathdev</Text>
         <Text className="text-[#cfc2d6] mt-1">Premium Member since 2026</Text>
       </View>
 
@@ -31,16 +31,12 @@ export default function ProfileScreen() {
         }}
       >
         <View className="bg-[#171f33] rounded-2xl p-4 mb-4 gap-2s">
-          <Text className="text-white text-xl font-quicksand-bold mb-8">
-            Profile Menu
-          </Text>
-
           {ProfileTabListing?.map((item) => (
             <TouchableOpacity
               key={item?.id}
               activeOpacity={0.8}
               onPress={() => router.push(item?.screen)}
-              className="bg-[#222a3d] rounded-xl px-4 py-4 mb-2 flex-row justify-between items-center"
+              className="bg-[#222a3d] rounded-xl px-4 py-5 mb-2 flex-row justify-between items-center"
             >
               <View className="flex-row items-center">
                 <Text className="text-white">{item?.title}</Text>

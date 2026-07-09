@@ -21,7 +21,7 @@ export default function RecommendationCard({
   item,
   index,
 }: Props) {
-  const statusStyle = {
+  const statusStyle: Record<Status, { text: string; color: string; glow: string }> = {
     seen: {
       text: "Seen",
       color: "#0566D9",
@@ -34,7 +34,7 @@ export default function RecommendationCard({
     },
   };
 
-  const current = statusStyle[item.status];
+  const current = statusStyle[item.status] ?? statusStyle.pending;
 
   return (
     <Animated.View entering={FadeInDown.delay(index * 120).springify()}>
@@ -90,18 +90,20 @@ export default function RecommendationCard({
                   <View className="flex-row items-center">
                     <Image
                       source={{ uri: item.receiverAvatar }}
-                      className="h-7 w-7 rounded-full"
+                      className="h-7 w-7 border border-white/10 rounded-full"
                     />
 
                     <Text
                       numberOfLines={1}
-                      className="max-w-[150px] text-sm font-quicksand-bold font-semibold text-zinc-300"
+                      className="ml-1 max-w-[150px] text-sm font-quicksand-bold font-semibold text-zinc-300"
                     >
                       {item.sender}
                     </Text>
                   </View>
 
-                  <Text className="text-xs text-zinc-500 font-quicksand-bold">{item.time}</Text>
+                  <Text className="text-xs text-zinc-500 font-quicksand-bold">
+                    {item.time}
+                  </Text>
                 </View>
               </View>
             </LinearGradient>

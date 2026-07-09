@@ -25,17 +25,14 @@ const Index = () => {
   const router = useRouter();
 
   return (
-    <ScreenWrapper className="flex-1 px-4" bg="#0b1326">
+    <ScreenWrapper className="flex-1 px-4" bg="#0b1326" scroll={false}>
       <TopBar />
-
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 24 }}
       >
         <HeroBanner />
-
-        {/* Releasing Today */}
-        <View className="mt-6">
+        <View className="mt-12">
           <View className="mb-3 flex-row items-center justify-between">
             <Text className="text-lg font-bold text-white font-quicksand-medium">
               Releasing Today
@@ -63,9 +60,7 @@ const Index = () => {
             ItemSeparatorComponent={() => <View className="w-3" />}
           />
         </View>
-
-        {/* Recommendations */}
-        <View className="mt-16">
+        <View className="mt-12">
           <View className="mb-3 flex-row items-center justify-between">
             <Text className="text-lg font-bold text-white font-quicksand-medium">
               Recommendations
@@ -91,20 +86,18 @@ const Index = () => {
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => router.push("/recommend-friend")}
-            className="rounded-2xl w-[50%] mx-auto mt-8"
+            className="w-2/5 mx-auto mt-8 overflow-hidden rounded-lg"
           >
             <LinearGradient
               colors={["#ddb7ff", "#842bd2"]}
-              className="flex-row items-center py-3 justify-center rounded-2xl"
+              className="items-center justify-center py-3"
             >
-              <Text className="ml-2 font-semibold text-white">
+              <Text className="font-quicksand-bold text-md text-white">
                 Recommend to friend
               </Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>
-
-        {/* Trending */}
         <View className="mt-12 mb-16">
           <View className="mb-3 flex-row items-center justify-between">
             <Text className="text-lg font-bold text-white font-quicksand-medium">
