@@ -96,7 +96,6 @@ function InitialLayout() {
       <Stack
         screenOptions={{
           headerShadowVisible: false,
-          // headerStyle: { backgroundColor: "#0b1326" },
           headerTintColor: "#fff",
           headerTitleStyle: {
             fontWeight: "700",
@@ -108,7 +107,12 @@ function InitialLayout() {
         {/* <Stack.Screen name="auth/login" options={{ headerShown: false }} /> */}
         {/* <Stack.Screen name="auth/signup" options={{ title: "Sign Up" }} /> */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        {/* <Stack.Screen name="(protected)" /> */}
+        <Stack.Screen
+          name="(protected)"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
 
       {!isLayoutMounted && (
@@ -137,7 +141,7 @@ export default function RootLayout() {
       <ReduxProvider>
         <PaperProvider>
           <InitialLayout />
-          <StatusBar style="dark" />
+          <StatusBar style="light" />
           <Toaster />
         </PaperProvider>
       </ReduxProvider>

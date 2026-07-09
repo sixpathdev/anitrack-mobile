@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 interface ScreenWrapperProps {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ interface ScreenWrapperProps {
   style?: StyleProp<ViewStyle>;
   className?: string;
   scroll?: boolean;
+  includeTopSafeArea?: boolean;
 }
 
 export default function ScreenWrapper({
@@ -26,6 +28,7 @@ export default function ScreenWrapper({
   style,
   className,
   scroll = true,
+  includeTopSafeArea = true,
 }: ScreenWrapperProps) {
   return (
     <SafeAreaView
@@ -38,7 +41,11 @@ export default function ScreenWrapper({
         style,
       ]}
       className={className}
-      edges={["top", "left", "right", "bottom"]}
+      edges={
+        includeTopSafeArea
+          ? ["top", "left", "right", "bottom"]
+          : ["left", "right", "bottom"]
+      }
     >
       <StatusBar style="light" />
 
@@ -48,13 +55,15 @@ export default function ScreenWrapper({
       >
         {scroll ? (
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <ScrollView
+            <KeyboardAwareScrollView
+              enableOnAndroid
+              extraScrollHeight={80}
               contentContainerStyle={{ flexGrow: 1 }}
               keyboardShouldPersistTaps="handled"
               showsVerticalScrollIndicator={false}
             >
               {children}
-            </ScrollView>
+            </KeyboardAwareScrollView>
           </TouchableWithoutFeedback>
         ) : (
           <View style={{ flex: 1 }}>{children}</View>

@@ -1,11 +1,12 @@
 import { FlatList, Text, View } from "react-native";
 import ScreenWrapper from "@/components/ScreenWrapper";
-import TopBar from "@/components/schedule/TopBar";
+import TopBar from "@/components/TopBar";
 import WeekTabs from "@/components/schedule/WeekTabs";
 import ScheduleCard from "@/components/schedule/ScheduleCard";
 import { scheduleData } from "@/datasource/scheduleData";
 
 export default function ScheduleScreen() {
+
   return (
     <ScreenWrapper bg="#0b1326" scroll={false}>
       <View className="pb-3">

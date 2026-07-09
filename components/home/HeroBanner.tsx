@@ -2,8 +2,12 @@ import React from "react";
 import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 export default function HeroBanner() {
+  const router = useRouter()
+
+
   return (
     <View className="mt-6 overflow-hidden rounded-3xl bg-red-50">
       <ImageBackground
@@ -26,7 +30,7 @@ export default function HeroBanner() {
             Cyber Samurai: 2099
           </Text>
 
-          <TouchableOpacity className="self-start overflow-hidden rounded-xl">
+          <TouchableOpacity activeOpacity={0.8} onPress={() => router.push("/anime/12345")} className="self-start overflow-hidden rounded-xl">
             <LinearGradient
               colors={["#ddb7ff", "#842bd2"]}
               className="flex-row items-center px-4 py-3"
