@@ -14,7 +14,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 const { width, height } = Dimensions.get("window");
 
-export default function SlideThree() {
+export default function SlideThree({ onSkip }: { onSkip: () => void }) {
   return (
     <SafeAreaView className="flex-1 overflow-hidden bg-[#0b1326]">
       <StatusBar barStyle="light-content" />
@@ -109,25 +109,24 @@ export default function SlideThree() {
                 <View className="absolute bottom-0 left-0 right-0 p-4">
                   <View className="mb-2 flex-row items-center">
                     <MaterialIcons name="star" size={18} color="#ddb7ff" />
-
-                    <Text className="ml-1 text-[11px] font-bold uppercase tracking-[1px] text-[#ddb7ff]">
+                    <Text className="ml-1 text-[11px] font-body uppercase tracking-[1px] text-[#ddb7ff]">
                       4.9 Rating
                     </Text>
                   </View>
 
-                  <Text className="text-[22px] font-bold text-[#dae2fd]">
+                  <Text className="text-[22px] font-body text-[#dae2fd]">
                     Aether Pulse
                   </Text>
 
                   <View className="mt-3 flex-row flex-wrap">
                     <View className="mr-2 rounded-md border border-[#ddb7ff]/30 bg-[#ddb7ff]/15 px-2 py-1">
-                      <Text className="text-[10px] font-bold uppercase text-[#ddb7ff]">
+                      <Text className="text-[10px] font-body uppercase text-[#ddb7ff]">
                         Cyberpunk
                       </Text>
                     </View>
 
                     <View className="rounded-md border border-[#adc6ff]/30 bg-[#adc6ff]/15 px-2 py-1">
-                      <Text className="text-[10px] font-bold uppercase text-[#adc6ff]">
+                      <Text className="text-[10px] font-body uppercase text-[#adc6ff]">
                         Seinen
                       </Text>
                     </View>
@@ -144,8 +143,7 @@ export default function SlideThree() {
               }}
             >
               <MaterialIcons name="auto-awesome" size={16} color="#4a1c00" />
-
-              <Text className="ml-1 text-[11px] font-bold uppercase text-[#4a1c00]">
+              <Text className="ml-1 text-[11px] font-subheading uppercase text-[#4a1c00]">
                 Match 98%
               </Text>
             </View>
@@ -153,11 +151,11 @@ export default function SlideThree() {
 
           {/* Text Content */}
           <View className="items-center px-3">
-            <Text className="text-center text-[30px] font-bold leading-[38px] text-[#dae2fd]">
+            <Text className="text-center text-[30px] font-subheading leading-[38px] text-[#dae2fd]">
               Discover Your Next Favorite
             </Text>
 
-            <Text className="mt-4 text-center text-[15px] leading-7 text-[#cfc2d6]">
+            <Text className="mt-4 text-center font-body text-[15px] leading-7 text-[#cfc2d6]">
               Our cinematic engine learns your taste to provide high-fidelity
               recommendations tailored to your soul.
             </Text>
@@ -180,7 +178,8 @@ export default function SlideThree() {
         </View>
 
         <TouchableOpacity
-          activeOpacity={0.9}
+          activeOpacity={0.8}
+          onPress={onSkip}
           className="w-full overflow-hidden rounded-full"
         >
           <LinearGradient
@@ -189,7 +188,9 @@ export default function SlideThree() {
             end={{ x: 1, y: 0 }}
             className="h-14 flex-row items-center justify-center rounded-full"
           >
-            <Text className="text-[18px] font-bold text-[#400071]">Finish</Text>
+            <Text className="text-[18px] font-subheading text-[#400071]">
+              Finish
+            </Text>
           </LinearGradient>
         </TouchableOpacity>
       </View>

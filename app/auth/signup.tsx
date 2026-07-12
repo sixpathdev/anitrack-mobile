@@ -4,23 +4,40 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  TextInput,
   ScrollView,
   Dimensions,
+  Pressable,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
-import MaskedView from "@react-native-masked-view/masked-view";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import ScreenWrapper from "@/components/ScreenWrapper";
+import { useRouter } from "expo-router";
+import AppTextInput from "@/components/form/AppTextInput";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SignupFormData, signupSchema } from "@/validations/auth";
 
 const { width } = Dimensions.get("window");
 
 export default function SignupScreen() {
-  const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting, isValid },
+  } = useForm<SignupFormData>({
+    resolver: zodResolver(signupSchema),
+    mode: "onChange",
+    defaultValues: {
+      fullname: "",
+      username: "",
+      email: "",
+      password: "",
+    },
+  });
 
   return (
-    <ScreenWrapper className="flex-1" bg="#0b1326">
+    <ScreenWrapper className="flex-1" bg="#0b1326" scroll>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
@@ -29,57 +46,21 @@ export default function SignupScreen() {
           paddingHorizontal: 20,
         }}
       >
-        {/* Main Container */}
         <View
           style={{
             width: "100%",
             maxWidth: 420,
             alignSelf: "flex-start",
-            backgroundColor: "red",
           }}
         >
-          {/* Header */}
-          {/* Logo */}
-          <View className="items-center">
-            {/* <MaskedView
-              maskElement={
-                <Text
-                  style={{
-                    fontSize: 42,
-                    fontWeight: "800",
-                    color: "black",
-                  }}
-                >
-                  AniTrack
-                </Text>
-              }
-            >
-              <LinearGradient
-                colors={["#ddb7ff", "#adc6ff"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-              >
-                <Text
-                  style={{
-                    opacity: 0,
-                    fontSize: 42,
-                    fontWeight: "800",
-                  }}
-                >
-                  AniTrack
-                </Text>
-              </LinearGradient>
-            </MaskedView> */}
-
-            <Text className="max-w-[280px] text-center text-quicksand-medium text-[15px] leading-6 text-[#cfc2d6]">
+          <View className="items-center mb-6">
+            <Text className="max-w-[280px] text-center font-subheading text-[14px] leading-6 text-[#cfc2d6]">
               Kickstart your journey in the world of animes storytelling and
               track your journey.
             </Text>
           </View>
-
-          {/* Login Card */}
           <View
-            className="mt-8 overflow-hidden rounded-[28px] border border-white/10"
+            className="mt-8 overflow-hidden rounded-xl border border-white/10"
             style={{
               shadowColor: "#000",
               shadowOpacity: 0.35,
@@ -90,140 +71,50 @@ export default function SignupScreen() {
           >
             <BlurView intensity={40} tint="dark">
               <View
-                className="p-6"
+                className="py-10 px-4"
                 style={{
                   backgroundColor: "rgba(30,41,59,0.45)",
                 }}
               >
-                {/* Social Buttons */}
-                <View>
-                  {/* Google */}
-                  <TouchableOpacity
-                    activeOpacity={0.85}
-                    className="mb-4 flex-row items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-5 py-4"
-                  >
-                    <Image
-                      source={{
-                        uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuA1qqUrwtceoZUXbuDZn-zSajF55kQotlBOVW48JqkZNENodbBgA1B38KRVoBHtvIVz4xWEnNmzV1SMJCIsGEwZPpIEcMR3g8OBrh_MKWIZ5VNRYIb3B_hd1qBllxTBr0_M2B82rWRZFB7Y0zrG9FBtsFSqKfKKx9d_1yhaPMxoWx228y1zxD3GwD3pTHDf4dPEzqu8NQp2VYX2Z4T07brvBtQIYg6yobytGNFoRa1fBLToqydndlM2g97RK5tYmN3lRHBKgTQ0Di5Z",
-                      }}
-                      className="h-5 w-5"
-                      resizeMode="contain"
-                    />
+                <AppTextInput
+                  control={control}
+                  name="fullname"
+                  label="Full Name"
+                  placeholder="John Doe"
+                  keyboardType="default"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                />
+                <AppTextInput
+                  control={control}
+                  name="username"
+                  label="Username"
+                  placeholder="johndoe"
+                  keyboardType="default"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                />
+                <AppTextInput
+                  control={control}
+                  name="email"
+                  label="Email Address"
+                  placeholder="name@example.com"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                />
+                <AppTextInput
+                  control={control}
+                  name="password"
+                  label="Password"
+                  placeholder="••••••••"
+                  secureTextEntry
+                  isPassword={true}
+                />
 
-                    <Text className="ml-3 text-[16px] font-semibold text-[#dae2fd]">
-                      Continue with Google
-                    </Text>
-                  </TouchableOpacity>
-
-                  {/* Apple */}
-                  {/* <TouchableOpacity
-                    activeOpacity={0.85}
-                    className="flex-row items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-5 py-4"
-                  >
-                    <Ionicons name="logo-apple" size={22} color="#dae2fd" />
-
-                    <Text className="ml-3 text-[16px] font-semibold text-[#dae2fd]">
-                      Continue with Apple
-                    </Text>
-                  </TouchableOpacity> */}
-                </View>
-
-                {/* Divider */}
-                <View className="my-6 flex-row items-center">
-                  <View className="h-[1px] flex-1 bg-white/10" />
-
-                  <Text className="mx-4 text-[11px] font-bold tracking-[2px] text-[#988d9f]">
-                    OR EMAIL
-                  </Text>
-
-                  <View className="h-[1px] flex-1 bg-white/10" />
-                </View>
-
-                {/* Email */}
-                <View className="mb-5">
-                  <Text className="mb-2 ml-2 text-[11px] font-bold tracking-[2px] text-[#cfc2d6]">
-                    NAME
-                  </Text>
-                  <View className="flex-row items-center rounded-2xl border border-white/10 bg-[#2d3449]/40 px-4 py-4">
-                    <MaterialIcons
-                      name="person-outline"
-                      size={20}
-                      color="#988d9f"
-                    />
-                    <TextInput
-                      placeholder="John Doe"
-                      placeholderTextColor="#988d9f"
-                      keyboardType="default"
-                      className="ml-3 flex-1 text-[16px] text-[#dae2fd]"
-                    />
-                  </View>
-                </View>
-
-                {/* Email */}
-                <View className="mb-5">
-                  <Text className="mb-2 ml-2 text-[11px] font-bold tracking-[2px] text-[#cfc2d6]">
-                    EMAIL ADDRESS
-                  </Text>
-                  <View className="flex-row items-center rounded-2xl border border-white/10 bg-[#2d3449]/40 px-4 py-4">
-                    <MaterialIcons
-                      name="mail-outline"
-                      size={20}
-                      color="#988d9f"
-                    />
-                    <TextInput
-                      placeholder="name@example.com"
-                      placeholderTextColor="#988d9f"
-                      keyboardType="email-address"
-                      className="ml-3 flex-1 text-[16px] text-[#dae2fd]"
-                    />
-                  </View>
-                </View>
-
-                {/* Password */}
-                <View>
-                  <View className="mb-2 flex-row items-center justify-between px-2">
-                    <Text className="text-[11px] font-bold tracking-[2px] text-[#cfc2d6]">
-                      PASSWORD
-                    </Text>
-
-                    <TouchableOpacity activeOpacity={0.7}>
-                      <Text className="text-[11px] font-bold tracking-[1px] text-[#ddb7ff]">
-                        FORGOT PASSWORD?
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-
-                  <View className="flex-row items-center rounded-2xl border border-white/10 bg-[#2d3449]/40 px-4 py-4">
-                    <MaterialIcons
-                      name="lock-outline"
-                      size={20}
-                      color="#988d9f"
-                    />
-
-                    <TextInput
-                      placeholder="••••••••"
-                      placeholderTextColor="#988d9f"
-                      secureTextEntry={!showPassword}
-                      className="ml-3 flex-1 text-[16px] text-[#dae2fd]"
-                    />
-
-                    <TouchableOpacity
-                      activeOpacity={0.7}
-                      onPress={() => setShowPassword(!showPassword)}
-                    >
-                      <MaterialIcons
-                        name={showPassword ? "visibility-off" : "visibility"}
-                        size={20}
-                        color="#988d9f"
-                      />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-
-                {/* Sign In Button */}
                 <TouchableOpacity
-                  activeOpacity={0.9}
-                  className="mt-6 overflow-hidden rounded-2xl"
+                  activeOpacity={0.8}
+                  className="overflow-hidden rounded-2xl"
                   style={{
                     shadowColor: "#b76dff",
                     shadowOpacity: 0.35,
@@ -237,24 +128,25 @@ export default function SignupScreen() {
                     end={{ x: 1, y: 0 }}
                     className="items-center justify-center py-4"
                   >
-                    <Text className="text-[17px] font-bold text-white">
-                      Sign In to AniTrack
+                    <Text className="text-[17px] font-subheading font-bold text-white">
+                      Sign Up
                     </Text>
                   </LinearGradient>
                 </TouchableOpacity>
+
+                <View className="mt-8 items-center">
+                  <Text className="text-center font-body text-[14px] text-[#cfc2d6]">
+                    Already have an account?
+                    <Pressable onPress={() => router.replace("/auth/login")}>
+                      <Text className="font-subheading font-semibold text-[#ddb7ff]">
+                        {" "}
+                        Sign In
+                      </Text>
+                    </Pressable>
+                  </Text>
+                </View>
               </View>
             </BlurView>
-          </View>
-
-          {/* Footer */}
-          <View className="mt-8 items-center">
-            <Text className="text-center text-[14px] text-[#cfc2d6]">
-              Don't have an account?
-              <Text className="font-semibold text-[#ddb7ff]">
-                {" "}
-                Sign up for free
-              </Text>
-            </Text>
           </View>
         </View>
       </ScrollView>
@@ -282,6 +174,7 @@ export default function SignupScreen() {
           </View>
         ))}
       </View>
+
     </ScreenWrapper>
   );
 }

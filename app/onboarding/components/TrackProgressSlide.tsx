@@ -1,7 +1,7 @@
 import React from "react";
 import { OnboardingSlideTemplate } from "./OnboardingSlideTemplate";
 
-export const TrackProgressSlide = () => (
+const TrackProgressSlide = () => (
   <OnboardingSlideTemplate
     icon="bookmark"
     title="Track Progress"
@@ -9,3 +9,6 @@ export const TrackProgressSlide = () => (
     color="#0566d9"
   />
 );
+
+export default TrackProgressSlide;
+export { TrackProgressSlide };

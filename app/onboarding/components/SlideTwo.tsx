@@ -16,7 +16,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 const { width } = Dimensions.get("window");
 
-export default function SlideTwo() {
+export default function SlideTwo({ onNextSlide, onSkip }: { onNextSlide: () => void; onSkip: () => void }) {
   return (
     <SafeAreaView className="flex-1 bg-[#0b1326] overflow-hidden">
       <StatusBar barStyle="light-content" />
@@ -37,12 +37,15 @@ export default function SlideTwo() {
       </ImageBackground>
 
       <View style={s.header} className="mt-2 mb-16 px-4">
-        <Text style={s.logo}>AniTrack</Text>
+        <Text style={s.logo} className="font-heading">
+          AniTrack
+        </Text>
         <TouchableOpacity
           activeOpacity={0.7}
           hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          onPress={onSkip}
         >
-          <Text style={s.skip} className="font-quicksand-bold">
+          <Text style={s.skip} className="font-heading">
             SKIP
           </Text>
         </TouchableOpacity>
@@ -103,7 +106,7 @@ export default function SlideTwo() {
                     <Text
                       numberOfLines={1}
                       ellipsizeMode="tail"
-                      className="ml-3 flex-1 text-[11px] font-semibold tracking-[1px] text-[#cfc2d6]"
+                      className="ml-3 flex-1 text-[11px] font-subheading tracking-[1px] text-[#cfc2d6]"
                     >
                       ANITRACK • NOW
                     </Text>
@@ -113,11 +116,11 @@ export default function SlideTwo() {
                 </View>
 
                 <View className="mt-5">
-                  <Text className="text-[20px] font-bold text-[#dae2fd]">
+                  <Text className="text-[20px] font-subheading text-[#dae2fd]">
                     New Episode Airing!
                   </Text>
 
-                  <Text className="mt-2 text-[14px] leading-6 text-[#cfc2d6]">
+                  <Text className="mt-2 text-[14px] font-body leading-6 text-[#cfc2d6]">
                     Void Stalker Season 2, Episode 05 is now available for
                     streaming. Stay ahead of the spoilers!
                   </Text>
@@ -155,9 +158,9 @@ export default function SlideTwo() {
                           <Text
                             numberOfLines={1}
                             ellipsizeMode="tail"
-                            className="ml-2 text-[11px] font-bold tracking-[1px] text-[#ddb7ff]"
+                            className="ml-2 text-[11px] font-medium tracking-[1px] text-[#ddb7ff]"
                           >
-                            REMIND ME
+                            Remind Me
                           </Text>
                         </View>
                       </BlurView>
@@ -169,10 +172,10 @@ export default function SlideTwo() {
           </View>
 
           <View className="mt-12 px-2">
-            <Text className="text-center text-[28px] font-quicksand-bold leading-[36px] text-[#dae2fd]">
+            <Text className="text-center text-[28px] font-subheading leading-[36px] text-[#dae2fd]">
               Never Miss a Release
             </Text>
-            <Text className="mt-2 text-center text-[14px] font-quicksand-medium leading-6 text-[#cfc2d6]">
+            <Text className="mt-2 text-center text-[14px] font-body leading-6 text-[#cfc2d6]">
               Get instant alerts when your favorite simulcasts go live. Your
               watchlist, synchronized with the world.
             </Text>
@@ -194,7 +197,8 @@ export default function SlideTwo() {
           </View>
 
           <TouchableOpacity
-            activeOpacity={0.9}
+            activeOpacity={0.8}
+            onPress={onNextSlide}
             className="w-full overflow-hidden rounded-full"
           >
             <LinearGradient

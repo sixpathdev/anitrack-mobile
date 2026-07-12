@@ -1,7 +1,7 @@
 import React from "react";
 import { OnboardingSlideTemplate } from "./OnboardingSlideTemplate";
 
-export const DiscoverAnimeSlide = () => (
+const DiscoverAnimeSlide = () => (
   <OnboardingSlideTemplate
     icon="play-circle-filled"
     title="Discover Anime"
@@ -9,3 +9,6 @@ export const DiscoverAnimeSlide = () => (
     color="#ddb7ff"
   />
 );
+
+export default DiscoverAnimeSlide;
+export { DiscoverAnimeSlide };

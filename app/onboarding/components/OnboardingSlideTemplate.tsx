@@ -10,7 +10,7 @@ interface OnboardingSlideProps {
   color: string;
 }
 
-export const OnboardingSlideTemplate: React.FC<OnboardingSlideProps> = ({
+const OnboardingSlideTemplate: React.FC<OnboardingSlideProps> = ({
   icon,
   title,
   description,
@@ -79,3 +79,6 @@ export const OnboardingSlideTemplate: React.FC<OnboardingSlideProps> = ({
     </View>
   );
 };
+
+export default OnboardingSlideTemplate;
+export { OnboardingSlideTemplate };

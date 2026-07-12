@@ -1,7 +1,7 @@
 import React from "react";
 import { OnboardingSlideTemplate } from "./OnboardingSlideTemplate";
 
-export const StayUpdatedSlide = () => (
+const StayUpdatedSlide = () => (
   <OnboardingSlideTemplate
     icon="calendar-today"
     title="Stay Updated"
@@ -9,3 +9,6 @@ export const StayUpdatedSlide = () => (
     color="#ddb7ff"
   />
 );
+
+export default StayUpdatedSlide;
+export { StayUpdatedSlide };

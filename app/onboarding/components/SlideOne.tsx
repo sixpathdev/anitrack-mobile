@@ -28,7 +28,13 @@ const C = {
   onPrimary: "#490080",
 };
 
-export default function AniTrackOnboardingScreen() {
+export default function AniTrackOnboardingScreen({
+  onNextSlide,
+  onSkip,
+}: {
+  onNextSlide: () => void;
+  onSkip: () => void;
+}) {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(40)).current;
   const scaleAnim = useRef(new Animated.Value(0.88)).current;
@@ -91,12 +97,15 @@ export default function AniTrackOnboardingScreen() {
       <View className="flex-1 items-center">
         <View>
           <View style={s.header} className="mb-8 px-4">
-            <Text style={s.logo}>AniTrack</Text>
+            <Text style={s.logo} className="font-outfit-bold">
+              AniTrack
+            </Text>
             <TouchableOpacity
-              activeOpacity={0.7}
+              activeOpacity={0.8}
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+              onPress={onSkip}
             >
-              <Text style={s.skip} className="font-quicksand-bold">
+              <Text style={s.skip} className="font-subheading">
                 SKIP
               </Text>
             </TouchableOpacity>
@@ -132,11 +141,11 @@ export default function AniTrackOnboardingScreen() {
 
                 {/* Label row */}
                 <View style={s.infoRow}>
-                  <Text style={s.labelCaps} className="font-quicksand-medium">
-                    CURRENTLY WATCHING
+                  <Text style={s.labelCaps} className="font-subheading">
+                    Currently Watching
                   </Text>
-                  <Text style={s.epLabel} className="font-quicksand-medium">
-                    EP 12/24
+                  <Text style={s.epLabel} className="font-subheading">
+                    Ep 12/24
                   </Text>
                 </View>
 
@@ -164,10 +173,10 @@ export default function AniTrackOnboardingScreen() {
             </Animated.View>
 
             <View style={s.textBlock}>
-              <Text style={s.headline} className="font-quicksand-bold">
+              <Text style={s.headline} className="font-heading">
                 Track Your Progress
               </Text>
-              <Text style={s.body} className="font-quicksand-regular">
+              <Text style={s.body} className="font-body">
                 Never lose track of where you left off.{"\n"}Update episodes in
                 one tap.
               </Text>
@@ -190,7 +199,8 @@ export default function AniTrackOnboardingScreen() {
           </View>
 
           <TouchableOpacity
-            activeOpacity={0.9}
+            activeOpacity={0.8}
+            onPress={onNextSlide}
             className="w-full overflow-hidden rounded-full"
           >
             <LinearGradient
@@ -199,7 +209,9 @@ export default function AniTrackOnboardingScreen() {
               end={{ x: 1, y: 0 }}
               className="h-14 flex-row items-center justify-center rounded-full"
             >
-              <Text className="text-[18px] font-bold text-[#400071]">Next</Text>
+              <Text className="text-[18px] font-subheading text-[#400071]">
+                Next
+              </Text>
 
               <MaterialIcons
                 name="arrow-forward"

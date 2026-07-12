@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   Image,
-  TextInput,
   StatusBar,
   ScrollView,
   Dimensions,
@@ -14,20 +13,32 @@ import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import AppTextInput from "@/components/form/AppTextInput";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema, LoginFormData } from "@/validations/auth";
 
 const { width } = Dimensions.get("window");
 
 export default function LoginScreen() {
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting, isValid },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    mode: "onChange",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-  
   return (
     <SafeAreaView className="flex-1 overflow-hidden bg-[#0b1326]">
       <StatusBar barStyle="light-content" backgroundColor={"#0b1326"} />
-
       <View className="absolute inset-0">
         <View
           style={{
@@ -60,11 +71,9 @@ export default function LoginScreen() {
           contentContainerStyle={{
             flexGrow: 1,
             justifyContent: "flex-start",
-            paddingHorizontal: 20,
-            // paddingVertical: 40,
+            paddingHorizontal: "4%",
           }}
         >
-          {/* Main Container */}
           <View
             style={{
               width: "100%",
@@ -72,8 +81,6 @@ export default function LoginScreen() {
               alignSelf: "center",
             }}
           >
-            {/* Header */}
-            {/* Logo */}
             <View className="items-center">
               <MaskedView
                 maskElement={
@@ -104,15 +111,12 @@ export default function LoginScreen() {
                   </Text>
                 </LinearGradient>
               </MaskedView>
-
-              <Text className="mt-4 max-w-[280px] text-center text-[15px] leading-6 text-[#cfc2d6]">
+              <Text className="mt-4 max-w-[280px] text-center font-subheading text-[15px] leading-6 text-[#cfc2d6]">
                 Enter the world of animes storytelling and track your journey.
               </Text>
             </View>
-
-            {/* Login Card */}
             <View
-              className="mt-8 overflow-hidden rounded-[28px] border border-white/10"
+              className="mt-8 overflow-hidden rounded-xl border border-white/10"
               style={{
                 shadowColor: "#000",
                 shadowOpacity: 0.35,
@@ -123,14 +127,12 @@ export default function LoginScreen() {
             >
               <BlurView intensity={40} tint="dark">
                 <View
-                  className="p-6"
+                  className="py-10 px-4"
                   style={{
                     backgroundColor: "rgba(30,41,59,0.45)",
                   }}
                 >
-                  {/* Social Buttons */}
-                  <View>
-                    {/* Google */}
+                  {/* <View>
                     <TouchableOpacity
                       activeOpacity={0.85}
                       className="mb-4 flex-row items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-5 py-4"
@@ -143,88 +145,65 @@ export default function LoginScreen() {
                         resizeMode="contain"
                       />
 
-                      <Text className="ml-3 text-[16px] font-semibold text-[#dae2fd]">
+                      <Text className="ml-3 text-[16px] font-body font-semibold text-[#dae2fd]">
                         Continue with Google
                       </Text>
                     </TouchableOpacity>
-
-                    {/* Apple */}
                     <TouchableOpacity
                       activeOpacity={0.85}
                       className="flex-row items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-5 py-4"
                     >
                       <Ionicons name="logo-apple" size={22} color="#dae2fd" />
-
-                      <Text className="ml-3 text-[16px] font-semibold text-[#dae2fd]">
+                      <Text className="ml-3 text-[16px] font-body font-semibold text-[#dae2fd]">
                         Continue with Apple
                       </Text>
                     </TouchableOpacity>
                   </View>
-
-                  {/* Divider */}
                   <View className="my-6 flex-row items-center">
                     <View className="h-[1px] flex-1 bg-white/10" />
-
-                    <Text className="mx-4 text-[11px] font-bold tracking-[2px] text-[#988d9f]">
-                      OR EMAIL
+                    <Text className="mx-4 text-[11px] font-body font-semibold tracking-[2px] text-[#988d9f]">
+                      Or Email
                     </Text>
-
                     <View className="h-[1px] flex-1 bg-white/10" />
                   </View>
-
-                  {/* Email */}
-                  <View className="mb-5">
-                    <Text className="mb-2 ml-2 text-[11px] font-bold tracking-[2px] text-[#cfc2d6]">
-                      EMAIL ADDRESS
+                  */}
+                  {/* <View className="mb-8">
+                    <Text className="mb-1 text-[12px] font-body font-semibold text-[#cfc2d6]">
+                      Email Address
                     </Text>
-
-                    <View className="flex-row items-center rounded-2xl border border-white/10 bg-[#2d3449]/40 px-4 py-4">
-                      <MaterialIcons
-                        name="mail-outline"
-                        size={20}
-                        color="#988d9f"
-                      />
-
-                      <TextInput
-                        placeholder="name@example.com"
-                        placeholderTextColor="#988d9f"
-                        keyboardType="email-address"
-                        className="ml-3 flex-1 text-[16px] text-[#dae2fd]"
-                      />
-                    </View>
-                  </View>
-
-                  {/* Password */}
-                  <View>
-                    <View className="mb-2 flex-row items-center justify-between px-2">
-                      <Text className="text-[11px] font-bold tracking-[2px] text-[#cfc2d6]">
-                        PASSWORD
-                      </Text>
-
-                      <TouchableOpacity activeOpacity={0.7}>
-                        <Text className="text-[11px] font-bold tracking-[1px] text-[#ddb7ff]">
-                          FORGOT PASSWORD?
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-
-                    <View className="flex-row items-center rounded-2xl border border-white/10 bg-[#2d3449]/40 px-4 py-4">
-                      <MaterialIcons
-                        name="lock-outline"
-                        size={20}
-                        color="#988d9f"
-                      />
-
+                    <TextInput
+                      placeholder="name@example.com"
+                      placeholderTextColor="#988d9f"
+                      keyboardType="email-address"
+                      className="px-2 h-12 text-[14px] font-body rounded-xl bg-[#2d3449] border border-white/10 text-[#dae2fd]"
+                      style={{ height: 48 }}
+                    />
+                  </View> */}
+                  <AppTextInput
+                    control={control}
+                    name="email"
+                    label="Email Address"
+                    placeholder="name@example.com"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                  />
+                  {/* <View className="mb-8">
+                    <Text className="mb-1 text-[12px] font-body font-semibold text-[#cfc2d6]">
+                      Password
+                    </Text>
+                    <View className="relative">
                       <TextInput
                         placeholder="••••••••"
                         placeholderTextColor="#988d9f"
                         secureTextEntry={!showPassword}
-                        className="ml-3 flex-1 text-[16px] text-[#dae2fd]"
+                        className="px-2 h-12 text-[14px] font-body rounded-xl bg-[#2d3449] border border-white/10 text-[#dae2fd]"
+                        style={{ height: 48 }}
                       />
-
                       <TouchableOpacity
-                        activeOpacity={0.7}
+                        activeOpacity={0.8}
                         onPress={() => setShowPassword(!showPassword)}
+                        className="absolute right-0 top-7 -translate-y-1/2 rounded-r-xl py-4 px-3"
                       >
                         <MaterialIcons
                           name={showPassword ? "visibility-off" : "visibility"}
@@ -233,12 +212,41 @@ export default function LoginScreen() {
                         />
                       </TouchableOpacity>
                     </View>
+                    <View className="mb-1 flex-row items-center justify-end px-2">
+                      <TouchableOpacity
+                        activeOpacity={0.8}
+                        className="mt-2 p-1"
+                        onPress={() => router.push("/auth/forgotpassword")}
+                      >
+                        <Text className="text-[14px] font-body font-bold text-[#ddb7ff]">
+                          Forgot Password?
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View> */}
+                  <AppTextInput
+                    control={control}
+                    name="password"
+                    label="Password"
+                    placeholder="••••••••"
+                    secureTextEntry
+                    isPassword={true}
+                    containerClassName="mb-0"
+                  />
+                  <View className="mb-8 flex-row items-center justify-end px-2">
+                    <TouchableOpacity
+                      activeOpacity={0.8}
+                      className="mt-2 p-1"
+                      onPress={() => router.push("/auth/forgotpassword")}
+                    >
+                      <Text className="text-[14px] font-body font-bold text-[#ddb7ff]">
+                        Forgot Password?
+                      </Text>
+                    </TouchableOpacity>
                   </View>
-
-                  {/* Sign In Button */}
                   <TouchableOpacity
-                    activeOpacity={0.9}
-                    className="mt-6 overflow-hidden rounded-2xl"
+                    activeOpacity={0.8}
+                    className="overflow-hidden rounded-2xl"
                     style={{
                       shadowColor: "#b76dff",
                       shadowOpacity: 0.35,
@@ -252,31 +260,29 @@ export default function LoginScreen() {
                       end={{ x: 1, y: 0 }}
                       className="items-center justify-center py-4"
                     >
-                      <Text className="text-[17px] font-bold text-white">
-                        Sign In to AniTrack
+                      <Text className="text-[17px] font-subheading font-bold text-white">
+                        Sign In
                       </Text>
                     </LinearGradient>
                   </TouchableOpacity>
+
+                  <View className="mt-8 items-center">
+                    <Text className="text-center font-body text-[14px] text-[#cfc2d6]">
+                      {`Don't`} have an account?
+                      <Pressable onPress={() => router.push("/auth/signup")}>
+                        <Text className="font-subheading font-semibold text-[#ddb7ff]">
+                          {" "}
+                          Sign up for free
+                        </Text>
+                      </Pressable>
+                    </Text>
+                  </View>
                 </View>
               </BlurView>
-            </View>
-
-            {/* Footer */}
-            <View className="mt-8 items-center">
-              <Text className="text-center text-[14px] text-[#cfc2d6]">
-                {`Don't`} have an account?
-                <Pressable onPress={() => router.push("/auth/signup")}>
-                  <Text className="font-semibold text-[#ddb7ff]">
-                    {" "}
-                    Sign up for free
-                  </Text>
-                </Pressable>
-              </Text>
             </View>
           </View>
         </ScrollView>
 
-        {/* Bottom Posters */}
         <View className="absolute bottom-0 left-0 right-0 flex-row justify-center opacity-10">
           {[
             "https://lh3.googleusercontent.com/aida-public/AB6AXuC8lhWfB-7KGL8Xu60riEUEu8lhiW2awVWdu_PEVJJUH42IGveyojjJOvHwGRPzWK8BvKIHEZQxP9dfq4wTTtxfTd5GzY5Pzjv_D0bNxI1D6X_nKmarMqoE9mRuBOk3oFmebC9E9tnsCyQacpUBHxE8I7FZ7REgmreRzXdzpBzY4HAZv1nWF3nE5p46LS1SaNWNgcRa5P7aEQjs-Z2V4TsiHOI1y8EI7Y6JmQu6czH9eMGR0lbp3-VXa0eYTBJyKcOFPmajsZEuFGGo",

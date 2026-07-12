@@ -1,7 +1,7 @@
 import React from "react";
 import { OnboardingSlideTemplate } from "./OnboardingSlideTemplate";
 
-export const ConnectShareSlide = () => (
+const ConnectShareSlide = () => (
   <OnboardingSlideTemplate
     icon="people"
     title="Connect & Share"
@@ -9,3 +9,6 @@ export const ConnectShareSlide = () => (
     color="#0566d9"
   />
 );
+
+export default ConnectShareSlide;
+export { ConnectShareSlide };

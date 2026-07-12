@@ -140,10 +140,13 @@ function InitialLayout() {
             },
           }}
         >
-          <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-
+          {/* <Stack.Screen name="onboarding" options={{ headerShown: false }} /> */}
+          <Stack.Screen name="auth/login" options={{ headerShown: false }} />
+          <Stack.Screen name="auth/forgotpassword" options={{ title: "Forgot Password" }} />
+          <Stack.Screen name="auth/verifyotp" options={{ title: "Verify Code" }} />
+          <Stack.Screen name="auth/reset-password" options={{ title: "Reset Password" }} />
+          <Stack.Screen name="auth/signup" options={{ title: "Sign Up" }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-
           <Stack.Screen
             name="(protected)"
             options={{
