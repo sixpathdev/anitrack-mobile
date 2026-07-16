@@ -98,7 +98,7 @@ export const signupSchema = z.object({
 export const verifyCodeSchema = z.object({
   code: z.string().superRefine((value, ctx) => {
     const trimmedValue = value.trim();
-    
+
     if (trimmedValue && trimmedValue.length < 5) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
@@ -108,19 +108,58 @@ export const verifyCodeSchema = z.object({
   }),
 });
 
+export const resetPasswordSchema = z
+  .object({
+    // password: z
+    //   .string()
+    //   .trim()
+    //   .min(8, "Password must be at least 8 characters.")
+    //   .regex(/[A-Z]/, "Password must contain an uppercase letter.")
+    //   .regex(/[a-z]/, "Password must contain a lowercase letter.")
+    //   .regex(/[0-9]/, "Password must contain a number.")
+    //   .regex(/[^A-Za-z0-9]/, "Password must contain a special character."),
+    password: z.string().superRefine((value, ctx) => {
+      const trimmedValue = value.trim();
 
-export const resetPasswordSchema = z.object({
-  password: z.string().superRefine((value, ctx) => {
-    const trimmedValue = value.trim();
+      if (!trimmedValue) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Password is required.",
+        });
+        return;
+      }
 
-    if (trimmedValue && trimmedValue.length < 4) {
+      if (trimmedValue.length < 4) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Password must be at least 4 characters.",
+        });
+      }
+    }),
+
+    confirm_password: z.string().superRefine((value, ctx) => {
+      if (!value.trim()) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Please confirm your password.",
+        });
+      }
+    }),
+  })
+  .superRefine(({ password, confirm_password }, ctx) => {
+    if (!confirm_password.trim()) {
+      return;
+    }
+
+  if (password !== confirm_password) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Password must be at least 4 characters",
+        path: ["confirm_password"],
+        message: "Passwords do not match.",
       });
     }
-  }),
-});
+  });
+
 
 export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
 export type LoginFormData = z.infer<typeof loginSchema>;

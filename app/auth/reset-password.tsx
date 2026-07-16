@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   Image,
-  TextInput,
   StatusBar,
   Dimensions,
   Pressable,
@@ -12,10 +11,9 @@ import {
 import { BlurView } from "expo-blur";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { LinearGradient } from "expo-linear-gradient";
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import AppTextInput from "@/components/form/AppTextInput";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ResetPasswordFormData, resetPasswordSchema } from "@/validations/auth";
 
@@ -23,21 +21,30 @@ const { width } = Dimensions.get("window");
 
 export default function ResetPasswordScreen() {
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
   const {
-      control,
-      handleSubmit,
-      watch,
-      formState: { isSubmitting, isValid },
-    } = useForm<ResetPasswordFormData>({
-      resolver: zodResolver(resetPasswordSchema),
-      mode: "onChange",
-      defaultValues: {
-        password: "",
-      },
-    });
+    control,
+    handleSubmit,
+    trigger,
+    formState: { isSubmitting, isValid, touchedFields },
+  } = useForm<ResetPasswordFormData>({
+    resolver: zodResolver(resetPasswordSchema),
+    mode: "onChange",
+    defaultValues: {
+      password: "",
+      confirm_password: "",
+    },
+  });
 
-    
+  const password = useWatch({
+    control,
+    name: "password",
+  });
+
+  useEffect(() => {
+    if (touchedFields.confirm_password) {
+      trigger("confirm_password");
+    }
+  }, [password, touchedFields.confirm_password, trigger]);
 
   return (
     <ScreenWrapper className="flex-1 px-4" bg="#0b1326" scroll>
@@ -54,11 +61,7 @@ export default function ResetPasswordScreen() {
             Reset Password
           </Text>
           <Text className="mt-2 max-w-[280px] font-body text-[14px] text-[#cfc2d6]">
-            Enter the code sent to{" "}
-            <Text className="text-white font-bold">
-              {"sixpathdev@gmail.com"}
-            </Text>{" "}
-            to reset your password.
+            Enter a new password to login to your account
           </Text>
         </>
         <View
@@ -78,55 +81,24 @@ export default function ResetPasswordScreen() {
                 backgroundColor: "rgba(30,41,59,0.45)",
               }}
             >
-              <View className="mb-8">
-                <Text className="mb-1 text-[12px] font-body font-semibold text-[#cfc2d6]">
-                  Password
-                </Text>
-                <View className="relative">
-                  <TextInput
-                    placeholder="••••••••"
-                    placeholderTextColor="#988d9f"
-                    secureTextEntry={!showPassword}
-                    className="px-2 h-12 text-[14px] font-body rounded-xl bg-[#2d3449] border border-white/10 text-[#dae2fd]"
-                    style={{ height: 48 }}
-                  />
-                  <TouchableOpacity
-                    activeOpacity={0.8}
-                    onPress={() => setShowPassword(!showPassword)}
-                    className="absolute right-0 top-7 -translate-y-1/2 rounded-r-xl py-4 px-3"
-                  >
-                    <MaterialIcons
-                      name={showPassword ? "visibility-off" : "visibility"}
-                      size={20}
-                      color="#988d9f"
-                    />
-                  </TouchableOpacity>
-                </View>
-                <View className="mb-1 flex-row items-center justify-end px-2">
-                  <TouchableOpacity
-                    activeOpacity={0.8}
-                    className="mt-2 p-1"
-                    onPress={() => router.push("/auth/forgotpassword")}
-                  >
-                    <Text className="text-[14px] font-body font-bold text-[#ddb7ff]">
-                      Forgot Password?
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-              <View className="mt-2 mb-8 flex-row flex-wrap justify-end">
-                <Text className="font-body text-[14px] text-[#cfc2d6]">
-                  Didn&apos;t receive code?
-                </Text>
-                <Pressable
-                  onPress={() => router.push("/auth/login")}
-                  className="ml-1"
-                >
-                  <Text className="font-subheading font-semibold text-[#ddb7ff]">
-                    Resend
-                  </Text>
-                </Pressable>
-              </View>
+              <AppTextInput
+                control={control}
+                name="password"
+                label="New Password"
+                placeholder="••••••••"
+                secureTextEntry
+                isPassword={true}
+                containerClassName="mb-8"
+              />
+              <AppTextInput
+                control={control}
+                name="confirm_password"
+                label="Confirm Password"
+                placeholder="••••••••"
+                secureTextEntry
+                isPassword={true}
+                containerClassName="mb-8"
+              />
               <TouchableOpacity
                 activeOpacity={0.8}
                 className="overflow-hidden rounded-2xl"
@@ -136,7 +108,7 @@ export default function ResetPasswordScreen() {
                   shadowRadius: 20,
                   shadowOffset: { width: 0, height: 10 },
                 }}
-                onPress={() => router.push("/auth/reset-password")}
+                onPress={() => router.replace("/auth/login")}
               >
                 <LinearGradient
                   colors={["#b76dff", "#0566d9"]}
