@@ -253,6 +253,7 @@ export default function LoginScreen() {
                       shadowRadius: 20,
                       shadowOffset: { width: 0, height: 10 },
                     }}
+                    onPress={() => router.push('/(tabs)')}
                   >
                     <LinearGradient
                       colors={["#b76dff", "#0566d9"]}

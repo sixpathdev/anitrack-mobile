@@ -110,7 +110,7 @@ export default function AddAnimeScreen() {
       </View>
       <TouchableOpacity
         activeOpacity={0.8}
-        className="bg-[#ddb7ff] rounded-xl py-4 gap-1 flex-row items-center justify-center mb-8"
+        className="bg-[#ddb7ff] rounded-xl py-4 gap-1 flex-row items-center justify-center mb-28"
       >
         <Ionicons name="library-outline" size={20} color="#490080" />
         <Text className="text-[#490080] text-lg font-semibold">

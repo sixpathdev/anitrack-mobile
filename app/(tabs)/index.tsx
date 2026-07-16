@@ -35,9 +35,8 @@ const Index = () => {
         <View className="mt-12">
           <View className="mb-3 flex-row items-center justify-between">
             <Text className="text-lg font-bold text-white font-quicksand-medium">
-              Releasing Today
+              My Watching
             </Text>
-
             <Pressable>
               <Text className="text-md font-bold text-white font-quicksand-medium">
                 See All
